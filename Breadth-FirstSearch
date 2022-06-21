@@ -1,0 +1,52 @@
+grafo = {
+    'Oradea' : ['Zerind', 'Sibiu'],
+    'Zerind' : ['Oradea', 'Arad'],
+    'Arad' : ['Zerind', 'Sibiu', 'Timisoara'],
+    'Timisoara' : ['Arad', 'Lugoj'],
+    'Lugoj' : ['Timisoara', 'Mehadia'],
+    'Mehadia' : ['Lugoj', 'Dobreta'],
+    'Dobreta' : ['Mehadia', 'Craiova'],
+    'Sibiu' : ['Oradea', 'Arad', 'RimnicuVilcea', 'Fagaras'],
+    'Fagaras' : ['Sibiu', 'Bucharest'],
+    'RimnicuVilcea' : ['Sibiu', 'Craiova', 'Pitesti'],
+    'Craiova' : ['Dobreta', 'RimnicuVilcea', 'Pitesti'],
+    'Pitesti' : ['RimnicuVilcea', 'Craiova', 'Bucharest'],
+    'Bucharest' : ['Fagaras', 'Pitesti', 'Giurgiu', 'Urziceni'],
+    'Giurgiu' : ['Bucharest'],
+    'Urziceni' : ['Bucharest', 'Vaslui', 'Hirsova'],
+    'Hirsova' : ['Urziceni', 'Eforie'],
+    'Eforie' : ['Hirsova'],
+    'Vaslui' : ['Urziceni', 'Iasi'],
+    'Iasi' : ['Vaslui', 'Neamt'],
+    'Neamt' : ['Iasi'],
+}
+
+def bfs(grafo, inicia, termina):
+    visitado = []
+
+    #Determinando o inicio da fila
+    fila = [[inicia]]
+
+    #Loop para gerar uma fila para o grafo
+    while fila:
+        caminho = fila.pop(0)
+        estado = caminho[-1]
+         
+        # Condição para checar os estados visitados 
+        if estado not in visitado:
+            neighbours = grafo[estado]
+
+            # Nova lista com o menor caminho 
+            for neighbour in neighbours:
+                novo_caminho = list(caminho)
+                novo_caminho.append(neighbour)
+                fila.append(novo_caminho)
+                
+                # Condição para o fim da checagem
+                if neighbour == termina:
+                    print("Menor Caminho = ", *novo_caminho)
+                    return
+            visitado.append(estado)
+# Iniciação do Algorítmo 
+bfs(grafo, 'Arad', 'Bucharest')
+     
