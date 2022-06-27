@@ -36,7 +36,7 @@ def bfs(grafo, inicia, termina):
         if estado not in visitado:
             neighbours = grafo[estado]
 
-            # Nova lista com o menor caminho 
+            # Nova lista com o caminho com menos estados 
             for neighbour in neighbours:
                 novo_caminho = list(caminho)
                 novo_caminho.append(neighbour)
